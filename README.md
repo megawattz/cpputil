@@ -52,17 +52,29 @@ Seralize functions where you cannot change the source code of the class.
    you just subclass from another Channel class and rewrite the following virtual functions:
 
    virtual void SerializePrimitive(const unsigned char& primitive) = 0;
+   
    virtual void SerializePrimitive(const signed char& primitive) = 0;
+   
    virtual void SerializePrimitive(const unsigned short& primitive) = 0;
+   
    virtual void SerializePrimitive(const signed short& primitive) = 0;
+   
    virtual void SerializePrimitive(const unsigned int& primitive) = 0;
+   
    virtual void SerializePrimitive(const signed int& primitive) = 0;
+   
    virtual void SerializePrimitive(const unsigned long& primitive) = 0;
+   
    virtual void SerializePrimitive(const signed long& primitive) = 0;
+   
    virtual void SerializePrimitive(const unsigned long long& primitive) = 0;
+   
    virtual void SerializePrimitive(const signed long long& primitive) = 0;
+   
    virtual void SerializePrimitive(const float& primitive) = 0;
+   
    virtual void SerializePrimitive(const double& primitive) = 0;
+   
    virtual void SerializePrimitive(const bool& primitive) = 0;
 
    Every complex class must boil down eventually to a combo of those primitives and if the code knows how to serialize
