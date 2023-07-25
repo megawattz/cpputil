@@ -1,51 +1,30 @@
-#Serializer
+/*
+   Copyright 2009 by Walt Howard
+   $Id: Serialize.h 2428 2012-08-14 15:33:13Z whoward $
+*/
 
-This library implements a set of dynamic templates which enable serializing and deserializing C++ objects into any
-format based on the principle of drilling down any complex object into it's primitive types and serializing those.
+#pragma once
 
-You create a very simple member function in your class called Serialize. During runtime, that function is called with
-the "Channel" you want. Channels do the work of taking sending your class into a non-C++ environment (Serializing), and
-reconstituting it later back into C++ objects (DeSerializing).
+#include <Exception.h>
+#include <Channel.h>
+#include <cstring>
+#include <string>
+#include <deque>
+#include <list>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <Misc.h>
+#include <errno.h>
+#include <iostream>
+#include <alloca.h>
 
-The Serialize functions drill down into your object and convert it into its primitive elements, or re-assemble the
-components into a whole object again, while the Channel functions send and receive those components to various media
-(disk, network, memory, XML, JSON etc).
+/**
+   Serialization Primitives
 
-You can define a Channel class yourself, or use the ones that are included if you don't particularly care the
-transmission format.
-
-YourClass::Serialize(Channel& channel) const;
-
-class BongoBongo
-{
-   int integer;            
-   std::string astring;
-   std::list<Text> alistofstrings;
-   
-   void Serialize(Channel& channel) const
-   { 
-       Serialize(integer, channel);  // Serialize Template figures out which function to use to serialize integers
-       Serialize(astring, channel);  // same for strings
-       Serialize(alistofstrings, channel);   // and STL objects (courtesy). 
-   }
-};
-
-That's it! That's all you need to do. Now your class can be streamed over any type of media, in any format.
-
-If a member of your class is itself a complex object, you don't need to be concerned about that beyond defining the
-Serialize function for that member class also. The Serialization works by calling successive member objects own
-Serialize functions!
-
-You can also write Serialize functions for a class, even if you don't have access to the source code.
-
-The included STL class Serialize functions are included in this library to serve as examples of how to implement
-Seralize functions where you cannot change the source code of the class.
-
-# Serialization Primitives
-
-   There are a series of function named with a "Serialize" that help you perform writing and reading of your class to a
-   different format than a C++ structure. It's used where you want to transmit your class across a network connection,
-   save it to disk for reconstitution etc.
+   There are a series of function named with a "Serialize" that help you perform writing and reading of your class to a different format than a C++
+   structure. It's used where you want to transmit your class across a network connection, save it to disk for reconstitution etc.
 
    Because the "format" and media written to must be flexible, a Channel class is used. The Channel class does the work of writing C++ native types,
    which every class must at its most fundamental form, be composed of. You define the Channel class, or used one of the pre-defined ones. To do this
@@ -87,6 +66,23 @@ Seralize functions where you cannot change the source code of the class.
    }
 
    Or a member function of this signature:
+
+   YourClass::Serialize(Channel& channel) const;
+
+   class BongoBongo
+   {
+       int integer;
+       std::string astring;
+       std::list<Text> alistofstrings;
+       void Serialize(Channel& channel) const
+       { 
+           Serialize(integer);  // Serialize Template figures out which function to use to serialize integers
+           Serialize(astring);  // same for strings
+           Serialize(alistofstrings);   // and stl objects
+       }
+   };
+
+   That's it! That's all you need to do. Now your class can be streamed over any type of media, in any format.
 
    The "Channel" you use defines 1) The formats involved 2) the destination (network, file, memory etc) and 3) the
    direction. Are you serializing IN (setting the values of this object from a stream) or serializing OUT (delivering
@@ -659,7 +655,3 @@ template<typename OBJECT> OBJECT& RecvObject(const Channel& channel, OBJECT& obj
     SERIALIZE(const_cast<Channel&>(channel), object);
     return const_cast<OBJECT&> (object);
 }
-
-//
-// $Id: Serialize.h 2428 2012-08-14 15:33:13Z whoward $
-//
