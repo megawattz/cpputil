@@ -27,10 +27,11 @@ public:
     };
 
     /*
-      Though you can serialize by decomposing everything down to primitives recursively, sometimes that isn't too readable. Some types are better
-      representing by shortcutting and displaying them a bit more high level. The Function MetaType will return what overall type the requested type
-      is. Then you can write you Channel to serialize them with an understanding of the type. This list can be added to as more interesting types of
-      classes get serialized. For example, a map is probably better displayed as
+      Though you can serialize by decomposing everything down to primitives recursively, sometimes that isn't too readable. For example, a string is an array of chars. Do you want to see:
+      'm','y',' ','n','a','m','e',' ','i','s',' ','B','i','l','l;  OR "my name is Bill".
+      Some types are better representing by shortcutting and displaying them a bit more high level. The Function MetaType will return what overall type the requested type
+      is. Then you can write your Channel to serialize them with an understanding of the type. This list can be added to as more interesting types of
+      classes get serialized. For example, a map is probably better displayed as. Note the serialization will still work if you don't do this, it just will be harder to read by a human
 
       items:
       {
