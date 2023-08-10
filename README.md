@@ -11,7 +11,7 @@ The Serialize functions drill down into your object and convert it into its prim
 components into a whole object again, while the Channel functions send and receive those components to various media
 (disk, network, memory, XML, JSON etc).
 
-You can define a Channel class yourself, or use the ones that are included if you don't particularly care the
+You can define a Channel class yourself, or use the ones that are included if you don't particularly care about the
 transmission format.
 
 YourClass::Serialize(Channel& channel) const;
