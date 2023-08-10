@@ -11,6 +11,12 @@ $Id: Text.h 2449 2012-09-18 17:57:20Z whoward $
 class Channel;
 class Regex;
 
+/*
+std::string terribly deficient. This is just a wrapper around it that adds some functionality that I personally want 
+and as a placeholder for future expansion, for example, to handle UTF-8 strings if the standard library never gets 
+around to doing that.
+*/
+
 class Text: public std::string
 {
 public:
