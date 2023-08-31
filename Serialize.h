@@ -123,16 +123,7 @@
 
    Additional Factors:
 
-   NOTE: Serializing a class means base class information must be serialized also. Due to the fact that this
-   won't compile: Serialize(file, OUT, static_cast<BaseClass* >(this));
-
-   We have a special function to serialize base classes:
-
-   Serialization::SerializeBase<BaseClassTypeName>(file, direction);
-
-   Your base class of course has to have it's own functions serializeAndDeserialize(), serialize() and deserialize().
-
-   Serialization::Serialize(file, direction, dynamic_cast<const BaseClass& >(this));
+   Your base class of course has to have it's own Serialize function.
 
    Serialization will apply itself recursively to any serializable data structure no matter how deep, as long
    as all the classes in the chain have the serialization members.
