@@ -256,9 +256,10 @@ public:
  *           classes, Example:
  *           Serialization::SerializeBase<YourBaseClassType>(file, direction,* this);
  *           Of course, the base class itself must also have a Serialize(Channel&, BaseClass&) function.
- *   @param  file       The  File object being streamed to/from.
- *   @param  direction  Specifies whether this is a serialization or deserialization.
+ *   @param  channel    The  file, network being streamed to/from
  *   @param  item       The item being Serialized.
+ *   @param  label	The class name normally. An deserializer may need to know what is being deserialized.
+ *                      plus some protocols like XML need a name for a section.
  */
 template<typename CLASS> inline void SerializeBase(Channel& channel, CLASS& item, const char* label = NULL)
 {
