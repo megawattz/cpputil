@@ -129,7 +129,7 @@
    as all the classes in the chain have the serialization members.
 
    The general idea here is that the Serialize template functions automatically instantiate to functions of the proper
-   type to Serialize just about any type. If a class has a pointer member, the thing pointed too must also have a 
+   type to Serialize just about any type. If a class has a pointer member, the referent must also have a 
    Serialize function (or be a primitive). The Serialization library will also serialize it then.
 
    Why is Serializing both in and out collapsed into the same function instead of having two functions like Serialize()
