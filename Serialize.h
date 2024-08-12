@@ -130,7 +130,10 @@
 
    The general idea here is that the Serialize template functions automatically instantiate to functions of the proper
    type to Serialize just about any type. If a class has a pointer member, the referent must also have a 
-   Serialize function (or be a primitive). The Serialization library will also serialize it then.
+   Serialize function (or be a primitive). The Serialization library will also serialize it then. This is known
+   as "template specialization" and it lets the simple "Serialize" template expand into other templates based
+   upon the type involved. That makes it a lot easier to Serialize something since you don't need to be 
+   concerned with it's type. The Serilize<> template knows what to do with it automagically.
 
    Why is Serializing both in and out collapsed into the same function instead of having two functions like Serialize()
    and DeSerialize()?
