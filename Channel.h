@@ -28,9 +28,14 @@ public:
 
     /*
       Though you can serialize by decomposing everything down to primitives recursively, sometimes that isn't too readable. Some types are better
-      representing by shortcutting and displaying them a bit more high level. The Function MetaType will return what overall type the requested type
-      is. Then you can write you Channel to serialize them with an understanding of the type. This list can be added to as more interesting types of
-      classes get serialized. For example, a map is probably better displayed as
+      representing by shortcutting and displaying them a bit more high level like a string as 
+      READABLE: "this is a string" 
+      instead of as an array which is how a string is stored internally 
+      UNREADABLE ['t','h','i','s',' ','i','s',' ','a',' ','s','t','r','i','n','g']. 
+      
+      The Function MetaType will return what overall type the requested type is. Then you can write you Channel to serialize them with an 
+      understanding of the type. This list can be added to as more interesting types of classes get serialized. For example, a map is 
+      probably better displayed as
 
       items:
       {
@@ -180,7 +185,7 @@ public:
     virtual void endOfClass(const char* classname, const char* label); // called just after streaming any non-simple class. These are not always needed.
 
     /**
-     Before serializing, you must call "open". If you are writing an channel, you must write into the beginnign of the channel with the name of the
+     Before serializing, you must call "open". If you are writing a channel, you must write into the beginnig of the channel with the name of the
      class you are serializing. When you are serializing in, pass NULL and open will return the class you must deserialize. Your overloaded open and
      close functions must emulate this behavior. Deserialization must be able to know WHAT class was serialized in this channel.
 
@@ -191,7 +196,7 @@ public:
      SerializeClassName() will assist you in this. These defaults provided in the base class should work for Channel that are simple raw binary
      streams of data.
 
-     IMPORTANT: open() and close() apply to the logical aspect of an Channel NOT the physical aspect. You can open() and close() an Channel multiple
+     IMPORTANT: open() and close() apply to the logical aspect of an Channel NOT the physical aspect. You can open() and close() a Channel multiple
      times for example while serializing to the same file, WITHOUT OPENING AND CLOSING THE FILE. The open() and close() serve to demark the objects
      that are in the stream. They don't open and close the physical stream.
      */
