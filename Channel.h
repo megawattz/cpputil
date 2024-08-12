@@ -148,11 +148,10 @@ public:
     /**
      Any channel class must only know how to stream in and out the C++ primitive types Your particular Channel class will have to override these
      functions: NOTE: when _direction is IN it means the parameters are serialized in, written to. You must cast away const in your functions when
-     _direction is IN. This seems unsafe but without doing that another can of worms is opened, mainly Serialization gets more complicated. Then
-     label parameter is optionally used if you want to label the data written, for example if you are streaming out XML. All code that serializes
-     should tag the data with a label because you don't know that later on a particular Channel class won't want to use that data when it
-     reads/writes. You need to label the data always, because you don't know what "Channel" class someone else will apply that WILL want the label
-     data.
+     _direction is IN. This seems unsafe but without doing that another can of worms is opened, mainly Serialization gets more complicated. The
+     label parameter is optionally used if you want to label the data written, for example if you are streaming out in an XML or JSON format. When
+     reconstituting (Serializing IN) a JSON or XML object for example, the data is not read in sequentially. It is assigned by member name. This
+     is where you might be sending C++ objects to a JavaScript receiver. If you are going C++ to C++ then you don't need to be concerned with label.
      */
 
     virtual size_t serializeChar(char*, const size_t& count, const char* label) = 0;
