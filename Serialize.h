@@ -88,7 +88,7 @@
    direction. Are you serializing IN (setting the values of this object from a stream) or serializing OUT (delivering
    the object to someone else)
 
-   If you don't have access to the source code of you class, you can define and non-member function to the the job:
+   If you don't have access to the source code of the class, you can define a non-member function to do the job:
 
    Example:
 
@@ -133,7 +133,7 @@
    Serialize function (or be a primitive). The Serialization library will also serialize it then. This is known
    as "template specialization" and it lets the simple "Serialize" template expand into other templates based
    upon the type involved. That makes it a lot easier to Serialize something since you don't need to be 
-   concerned with it's type. The Serilize<> template knows what to do with it automagically.
+   concerned with its type. The Serilize<> template knows what to do with it automagically.
 
    Why is Serializing both in and out collapsed into the same function instead of having two functions like Serialize()
    and DeSerialize()?
